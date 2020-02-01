@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Nounalayzer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container mt-3 d-flex flex-column">
+        <div class="form__container">
+            <form id="rss">
+                <div class="form-group">
+                    <label for="">RSS Feed Link</label>
+                    <input type="text" class="form__input form-control" id="rss__name">
+                    <small class="form-text text-muted">RSS Feeds are used to get timely and structured data from a website</small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+        <div class="res__container">
+            <div id="res__content"></div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
