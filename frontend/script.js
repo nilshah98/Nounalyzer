@@ -1,13 +1,16 @@
+// Selecting all the needed DOM elements
 const rss = document.getElementById("rss");
 const rssName = document.getElementById("rss__name");
 const rssRes = document.getElementById("res__content");
 
+// Adding event listener for form submission
 rss.addEventListener("submit", (e) => {
     e.preventDefault();
     console.log(rssName.value);
     getData(rssName.value);
 })
 
+// Helper function to normalize the height of bar charts
 const scaleVals = (vals) => {
   const scaleMin = 0;
   const scaleMax = 500;
@@ -24,17 +27,23 @@ const scaleVals = (vals) => {
 
 }
 
+// Getting data and visualising
 const getData = (feedURL) => {
+
+    // Making AJAX POST request to our flask server with the RSS feed link
     $.post("http://localhost:5000/rss",
     {
       rssLink: feedURL,
     },
+    // On receiving data back from the server
     function(res, _status){
 
+      // Scaling the data to fit into the bar graph height
       const dataset = scaleVals(res.dataset);
 
       console.log(dataset);
 
+      // Setting up graph height and width
       const svgHeight = 600, svgWidth = 600, barPadding = 5;
       const barWidth = svgWidth / dataset.length;
 
@@ -46,6 +55,7 @@ const getData = (feedURL) => {
         .attr('width', svgWidth)
         .attr('height', svgHeight)
 
+      // Creating D3 chart from the data
       var barChart = svg.selectAll('rect')
         .data(dataset)
         .enter()
@@ -68,6 +78,8 @@ const getData = (feedURL) => {
         .style("opacity",0.6)
 
       console.log(res.feeds);
+
+      // Filling in eacg RSS entry content
       rssRes.innerHTML += `</hr>`;
       for(let i=0; i<res.feeds.length; i++){
         rssRes.innerHTML += `<br/>`;
